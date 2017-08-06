@@ -10,6 +10,8 @@ except ImportError:
     from urllib import unquote
 
 from django.http import JsonResponse
+from django.utils import timezone
+
 
 from oidc_provider.lib.errors import (
     TokenError,
@@ -255,7 +257,10 @@ class TokenEndpoint(object):
         token.save()
 
         # Forget the old token.
-        self.token.delete()
+        # self.token.delete()
+        self.token.expires_at = timezone.now() + 3600
+
+    
 
         dic = {
             'access_token': token.access_token,
