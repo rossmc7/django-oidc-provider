@@ -257,7 +257,7 @@ class TokenEndpoint(object):
         token.save()
 
         # Forget the old token.
-        # self.token.delete()
+        self.token.delete()
         #self.token.expires_at = timezone.now() + 3600
         #self.token.save()
 
